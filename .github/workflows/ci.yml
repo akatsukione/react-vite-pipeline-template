@@ -33,6 +33,6 @@ jobs:
           npx eslint . --fix
           npx prettier . --write
 
-      # - name: npm test
-      #   run: |
-      #     npm run test
+      - name: npm test
+        run: |
+          npm run test
