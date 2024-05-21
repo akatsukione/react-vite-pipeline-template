@@ -46,9 +46,9 @@ jobs:
             password: ${{ secrets.SSH_PASSWORD }}
             #key: ${{ secrets.SSH_KEY }}
             #port: ${{ secrets.SSH_PORT }}
-            # script: |
-            #     docker pull ghcr.io/${{ github.actor }}/${{ github.repository }}:latest
-            #     docker run -p 3000:5173 --network=host ${{ github.actor }}/${{ github.repository }}:latest
+            run: |
+                docker pull ghcr.io/${{ github.actor }}/${{ github.repository }}:latest
+                docker run -p 3000:5173 --network=host ${{ github.actor }}/${{ github.repository }}:latest
 
 
           
