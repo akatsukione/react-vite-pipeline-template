@@ -28,7 +28,7 @@ jobs:
           docker build -t ${{ github.repository }}:${{ github.sha }} .
           docker tag ${{ github.repository }}:${{ github.sha }} ${{ github.repository }}:latest
       
-      - name: Push Docker imagPROD_SSH_HOSTe to GHCR
+      - name: Push Docker image to GHCR
         uses: docker/build-push-action@v5
         with:
             context: .
@@ -38,19 +38,19 @@ jobs:
                 ${{ secrets.REGISTRY }}/${{ github.repository }}:latest
     
     # Deploy on DEV
-      - name: SSH and build docker
-        uses: appleboy/ssh-action@master
-        with:
-            host: ${{ secrets.SSH_HOST }}
-            username: ${{ secrets.SSH_USERNAME }}
-            password: ${{ secrets.SSH_PASSWORD }}
-            #key: ${{ secrets.SSH_KEY }}
-            #port: ${{ secrets.SSH_PORT }}
+    #   - name: SSH and build docker
+    #     uses: appleboy/ssh-action@master
+    #     with:
+    #         host: ${{ secrets.SSH_HOST }}
+    #         username: ${{ secrets.SSH_USERNAME }}
+    #         password: ${{ secrets.SSH_PASSWORD }}
+    #         #key: ${{ secrets.SSH_KEY }}
+    #         #port: ${{ secrets.SSH_PORT }}
 
-      - name: Run the Docker image
-        run: |
-            docker pull ghcr.io/${{ github.actor }}/${{ github.repository }}:latest
-            docker run -p 5000:5173 --network=host ${{ github.actor }}/${{ github.repository }}:latest
+    #   - name: Run the Docker image
+    #     run: |
+    #         docker pull ghcr.io/${{ github.actor }}/${{ github.repository }}:latest
+    #         docker run -p 5000:5173 --network=host ${{ github.actor }}/${{ github.repository }}:latest
 
 
           
