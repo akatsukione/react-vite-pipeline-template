@@ -28,10 +28,10 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      # - name: Check eslint and prettier
-      #   run: |
-      #     npx eslint . --fix
-      #     npx prettier . --write
+      - name: Check eslint and prettier
+        run: |
+          npx eslint . --fix
+          npx prettier . --write
 
       # - name: npm test
       #   run: |
