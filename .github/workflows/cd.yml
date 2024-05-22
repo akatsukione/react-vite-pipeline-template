@@ -45,7 +45,7 @@ jobs:
       - name: Push Docker image to GHCR
         # uses: docker/build-push-action@v4
         run: |
-            docker build -t ghcr.io/akatsukione/react-vite-pipeline-template:${{ github.sha }} .
+            # docker build -t ghcr.io/akatsukione/react-vite-pipeline-template:${{ github.sha }} .
             docker push ghcr.io/akatsukione/react-vite-pipeline-template:${{ github.sha }}
     
     # Deploy on DEV
