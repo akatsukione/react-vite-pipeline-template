@@ -34,17 +34,22 @@ jobs:
     #       docker build -t ${{ github.repository }}:${{ github.sha }} .
         #   docker tag ${{ github.repository }}:${{ github.sha }}
       
+      # - name: Push Docker image to GHCR
+      #   uses: docker/build-push-action@v4
+      #   with:
+      #       context: .
+      #       push: true
+      #       tags: ghcr.io/${{ github.repository }}:${{ github.sha }}
+      #       cache-from: type=gha, scope = ${{github.workflow}}
+      #       cache-to: type=gha, mod = max, scope = ${{github.workflow}}
       - name: Push Docker image to GHCR
-        uses: docker/build-push-action@v4
-        with:
-            context: .
-            push: true
-            tags: ghcr.io/${{ github.repository }}:${{ github.sha }}
-            cache-from: type=gha, scope = ${{github.workflow}}
-            cache-to: type=gha, mod = max, scope = ${{github.workflow}}
+        # uses: docker/build-push-action@v4
+        run: |
+            docker build -t test-vite-image .
+            docker push ghcr.io/akatsukione/test-vite-image:${{ github.sha }}
     
     # Deploy on DEV
-      - name: SSH and build docker
+      - name: SSH access
         uses: appleboy/ssh-action@master
         with:
             host: ${{ secrets.SSH_HOST }}
@@ -55,7 +60,7 @@ jobs:
 
       - name: Run the Docker image
         run: |
-            docker pull ghcr.io/${{ github.actor }}/${{ github.repository }}:${{ github.sha }}
+            docker pull ghcr.io/akatuskione/test-vite-image:${{ github.sha }}
             docker images
     #         docker run -p 5000:5173 --network=host ${{ github.actor }}/${{ github.repository }}:latest
 
