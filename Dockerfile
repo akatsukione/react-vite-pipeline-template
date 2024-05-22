@@ -12,9 +12,9 @@ COPY package-lock.json .
 RUN npm ci
 
 COPY . .
-# RUN npm run build
+RUN npm run build
 # ENV CI = true
 # ENV PORT=3000
 EXPOSE 5173
 
-CMD [ "npm", "run", "dev" ]
+# CMD [ "npm", "run", "dev" ]
