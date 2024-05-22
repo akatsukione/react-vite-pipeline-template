@@ -54,6 +54,7 @@ jobs:
       - name: Run the Docker image
         run: |
             docker pull ghcr.io/${{ github.actor }}/${{ github.repository }}:${{ github.sha }}
+            docker images
     #         docker run -p 5000:5173 --network=host ${{ github.actor }}/${{ github.repository }}:latest
 
 
