@@ -9,7 +9,7 @@ COPY package.json .
 COPY package-lock.json .
 
 # Same as npm install
-RUN npm ci
+# RUN npm ci
 
 COPY . .
 # RUN npm run build
@@ -17,4 +17,4 @@ COPY . .
 # ENV PORT=3000
 EXPOSE 5000
 
-CMD [ "npm", "run", "dev" ]
+# CMD [ "npm", "run", "dev" ]
