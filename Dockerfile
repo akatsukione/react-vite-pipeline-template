@@ -14,7 +14,7 @@ RUN npm ci
 COPY . .
 RUN npm run build
 # ENV CI = true
-# ENV PORT=3000
+# ENV PORT=3333
 EXPOSE 5173
 
 # CMD [ "npm", "run", "dev" ]
