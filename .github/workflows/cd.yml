@@ -8,6 +8,10 @@ on:
 jobs:
   dev-build:
     runs-on: ubuntu-latest
+    permissions:
+        contents: read
+        packages: write
+        attestations: write
 
     steps:
       - name: Checkout code
@@ -19,22 +23,23 @@ jobs:
       - name: Login to GitHub Container Registry
         uses: docker/login-action@v3
         with:
-            registry: ${{ secrets.REGISTRY }}
+            registry: ghcr.io
             username: ${{ github.actor }}
             password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Inspect github.repository
+        run: echo "${{github.repository}}"
 
-      - name: Build the Docker image
-        run: |
-          docker build -t ${{ github.repository }}:${{ github.sha }} .
+    #   - name: Build the Docker image
+    #     run: |
+    #       docker build -t ${{ github.repository }}:${{ github.sha }} .
         #   docker tag ${{ github.repository }}:${{ github.sha }} ${{ github.repository }}:latest
       
     #   - name: Push Docker image to GHCR
-    #     uses: docker/build-push-action@v5
+    #     uses: docker/build-push-action@v4
     #     with:
     #         context: .
     #         push: true
-    #         tags: |
-    #             ${{ secrets.REGISTRY }}/${{ github.repository }}:${{ github.sha }}
+    #         tags: ghcr.io/${{ github.repository }}:${{ github.sha }}
     
     # Deploy on DEV
     #   - name: SSH and build docker
