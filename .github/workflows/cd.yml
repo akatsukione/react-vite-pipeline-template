@@ -40,6 +40,8 @@ jobs:
             context: .
             push: true
             tags: ghcr.io/${{ github.repository }}:${{ github.sha }}
+            cache-from: type=gha, scope = ${{github.workflow}}
+            cache-to: type=gha, mod = max, scope = ${{github.workflow}}
     
     # Deploy on DEV
       - name: SSH and build docker
