@@ -26,40 +26,25 @@ jobs:
             registry: ghcr.io
             username: ${{ github.actor }}
             password: ${{ secrets.GITHUB_TOKEN }}
-    #   - name: Inspect github.repository
-    #     run: echo "${{github.repository}}"
-
-    #   - name: Build the Docker image
-    #     run: |
-    #       docker build -t ${{ github.repository }}:${{ github.sha }} .
-        #   docker tag ${{ github.repository }}:${{ github.sha }}
       
       - name: Push Docker image to GHCR
         uses: docker/build-push-action@v4
         with:
             context: .
             push: true
-            tags: ghcr.io/${{ github.repository }}:${{ github.sha }}
-      # - name: Push Docker image to GHCR
-      #   # uses: docker/build-push-action@v4
-      #   run: |
-      #       docker build -t ghcr.io/akatsukione/react-vite-pipeline-template:${{ github.sha }} .
-      #       docker push ghcr.io/akatsukione/react-vite-pipeline-template:${{ github.sha }}
+            tags: ghcr.io/${{ github.repository }}:latest
     
-    # Deploy on DEV
+    # Deploy on Remote Server
       - name: Deploy to Remote Server
         uses: appleboy/ssh-action@master
         with:
             host: ${{ secrets.SSH_HOST }}
             username: ${{ secrets.SSH_USERNAME }}
             password: ${{ secrets.SSH_PASSWORD }}
-            script: docker pull ghcr.io/akatsukione/react-vite-pipeline-template:${{ github.sha }}
-
-
-      # - name: Run the Docker image
-      #   run: docker pull ghcr.io/akatuskione/react-vite-pipeline-template:${{ github.sha }}
-            # docker images
-    #         docker run -p 5000:5173 --network=host ${{ github.actor }}/${{ github.repository }}:latest
+            script: |
+              docker rmi ghcr.io/akatsukione/react-vite-pipeline-template:latest
+              docker pull ghcr.io/akatsukione/react-vite-pipeline-template:latest
+              docker run -p 5000:5173 --network=host ${{ github.actor }}/${{ github.repository }}:latest
 
 
           
