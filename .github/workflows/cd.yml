@@ -48,22 +48,15 @@ jobs:
     
     # Deploy on DEV
       - name: Deploy to Remote Server
-        env:
-          HOST: ${{ secrets.SSH_HOST }}
-          USERNAME: ${{ secrets.SSH_USERNAME }}
-          PASSWORD: ${{ secrets.SSH_PASSWORD }}
-        run: |
-          # Connect to the remote server using SSH
-          ssh $USERNAME@$HOST << $PASSWORD
-          # Pull the Docker image
-          docker pull ghcr.io/akatuskione/react-vite-pipeline-template:${{ github.sha }}
-        # uses: appleboy/ssh-action@master
-        # with:
-        #     host: ${{ secrets.SSH_HOST }}
-        #     username: ${{ secrets.SSH_USERNAME }}
-        #     password: ${{ secrets.SSH_PASSWORD }}
-        #     #key: ${{ secrets.SSH_KEY }}
-        #     #port: ${{ secrets.SSH_PORT }}
+        uses: appleboy/ssh-action@master
+        with:
+            host: ${{ secrets.SSH_HOST }}
+            username: ${{ secrets.SSH_USERNAME }}
+            password: ${{ secrets.SSH_PASSWORD }}
+            #key: ${{ secrets.SSH_KEY }}
+            #port: ${{ secrets.SSH_PORT }}
+            run: docker pull ghcr.io/akatuskione/react-vite-pipeline-template:${{ github.sha }}
+
 
       # - name: Run the Docker image
       #   run: docker pull ghcr.io/akatuskione/react-vite-pipeline-template:${{ github.sha }}
