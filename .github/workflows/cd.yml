@@ -33,7 +33,10 @@ jobs:
             context: .
             push: true
             tags: ghcr.io/${{ github.repository }}-v2:latest
-    
+  dev-deploy:
+    needs: [dev-build]
+    runs-on: ubuntu-latest
+    steps:
     # Deploy on Remote Server
       - name: Deploy to Remote Server
         uses: appleboy/ssh-action@master
