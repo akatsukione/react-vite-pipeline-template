@@ -45,10 +45,10 @@ jobs:
             username: ${{ secrets.SSH_USERNAME }}
             password: ${{ secrets.SSH_PASSWORD }}
             script: |
-              docker rm $(docker stop $(docker ps -a -q --filter ancestor=ghcr.io/${{ github.repository }}))
-              docker rmi ghcr.io/${{ github.repository }}
-              docker pull ghcr.io/${{ github.repository }}:latest
-              docker run -p 5000:5173 --network=host ghcr.io/${{ github.repository }}:latest
+              docker rm $(docker stop $(docker ps -a -q --filter ancestor=ghcr.io/${{ github.repository }}-v2))
+              docker rmi ghcr.io/${{ github.repository }}-v2
+              docker pull ghcr.io/${{ github.repository }}-v2:latest
+              docker run -p 5000:5173 --network=host ghcr.io/${{ github.repository }}-v2:latest
 
 
           
