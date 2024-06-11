@@ -3,7 +3,7 @@ name: CI operation - Build and Test
 on:
   push:
     branches:
-      - master
+      - test-branch
 
 jobs:
   build:
