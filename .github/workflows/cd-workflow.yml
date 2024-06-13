@@ -1,11 +1,11 @@
-name: Docker Image Sandbox
+name: Docker Image Sandbox for workflow file
 
 on:
   push:
     branches: 
       - master
     paths:
-      - src/**
+      - .github/workflows/**
 jobs:
   dev-build:
     runs-on: ubuntu-latest
