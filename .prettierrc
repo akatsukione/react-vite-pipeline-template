@@ -5,6 +5,10 @@
   "singleQuote": true,
   "endOfLine": "lf",
   "printWidth": 150,
+   "bracketSpacing": true,
+  "arrowParens": "always",
+  "jsxBracketSameLine": false,
+  "proseWrap": "preserve",
   "htmlWhitespaceSensitivity": "ignore",
   "overrides": [
     {
