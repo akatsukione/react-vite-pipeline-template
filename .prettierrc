@@ -4,5 +4,21 @@
   "semi": true,
   "singleQuote": true,
   "endOfLine": "lf",
-  "printWidth": 150
+  "printWidth": 150,
+  "htmlWhitespaceSensitivity": "ignore",
+  "overrides": [
+    {
+      "files": "*.tsx",
+      "options": {
+        "tabWidth": 2,
+        "useTabs": true
+      }
+    },
+    {
+      "files": "*.md",
+      "options": {
+        "proseWrap": "always"
+      }
+    }
+  ]
 }
